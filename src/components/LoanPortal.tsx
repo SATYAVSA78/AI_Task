@@ -1,36 +1,33 @@
 import React, { useState } from 'react';
-import { LoginForm } from './auth/LoginForm';
-import { OTPForm } from './auth/OTPForm';
+import { PhoneAccess } from './PhoneAccess';
 import { Dashboard } from './dashboard/Dashboard';
-import { useAuth } from '../hooks/useAuth';
+import { useLoanData } from '../hooks/useLoanData';
 
 export const LoanPortal = () => {
-  const { user, isAuthenticated } = useAuth();
-  const [authStep, setAuthStep] = useState<'login' | 'otp' | 'authenticated'>('login');
   const [mobileNumber, setMobileNumber] = useState('');
+  const [showDashboard, setShowDashboard] = useState(false);
+  
+  // Mock user data based on mobile number
+  const mockUser = mobileNumber ? {
+    mobileNumber,
+    name: 'Jane Doe',
+    applicationIds: ['A123']
+  } : null;
 
-  if (isAuthenticated) {
-    return <Dashboard user={user} />;
+  const { loans, isLoading } = useLoanData(mockUser?.applicationIds || []);
+
+  const handleAccess = (mobile: string) => {
+    setMobileNumber(mobile);
+    setShowDashboard(true);
+  };
+
+  if (showDashboard && mockUser) {
+    return <Dashboard user={mockUser} loans={loans} isLoading={isLoading} />;
   }
 
   return (
     <div className="min-h-screen bg-background">
-      {authStep === 'login' && (
-        <LoginForm 
-          onOTPSent={(mobile) => {
-            setMobileNumber(mobile);
-            setAuthStep('otp');
-          }}
-        />
-      )}
-      
-      {authStep === 'otp' && (
-        <OTPForm 
-          mobileNumber={mobileNumber}
-          onVerified={() => setAuthStep('authenticated')}
-          onBackToLogin={() => setAuthStep('login')}
-        />
-      )}
+      <PhoneAccess onAccess={handleAccess} />
     </div>
   );
 };

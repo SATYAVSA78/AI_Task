@@ -1,11 +1,11 @@
-import { AuthProvider } from '../hooks/useAuth';
+import { LanguageProvider } from '../hooks/useLanguage';
 import { LoanPortal } from '../components/LoanPortal';
 
 const Index = () => {
   return (
-    <AuthProvider>
+    <LanguageProvider>
       <LoanPortal />
-    </AuthProvider>
+    </LanguageProvider>
   );
 };
 
