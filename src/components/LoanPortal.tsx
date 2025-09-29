@@ -13,15 +13,13 @@ export const LoanPortal = () => {
     applicationIds: ['A123']
   } : null;
 
-  const { loans, isLoading } = useLoanData(mockUser?.applicationIds || []);
-
   const handleAccess = (mobile: string) => {
     setMobileNumber(mobile);
     setShowDashboard(true);
   };
 
   if (showDashboard && mockUser) {
-    return <Dashboard user={mockUser} loans={loans} isLoading={isLoading} />;
+    return <Dashboard user={mockUser} />;
   }
 
   return (
