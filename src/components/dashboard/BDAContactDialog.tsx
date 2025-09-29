@@ -62,28 +62,6 @@ export const BDAContactDialog: React.FC<BDAContactDialogProps> = ({ loan, onClos
             </CardContent>
           </Card>
 
-          <div className="flex gap-2">
-            <Button 
-              variant="outline" 
-              onClick={() => window.open(`tel:${loan.bdaPhone}`)}
-              className="flex-1 gap-2"
-            >
-              <Phone className="w-4 h-4" />
-              {t('call')}
-            </Button>
-            <Button 
-              variant="outline" 
-              onClick={() => window.open(`mailto:${loan.bdaEmail}`)}
-              className="flex-1 gap-2"
-            >
-              <Mail className="w-4 h-4" />
-              {t('email')}
-            </Button>
-          </div>
-
-          <Button variant="outline" onClick={onClose} className="w-full">
-            {t('close')}
-          </Button>
         </div>
       </DialogContent>
     </Dialog>
