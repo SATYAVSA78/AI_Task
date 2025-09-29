@@ -22,7 +22,6 @@ import {
   History
 } from 'lucide-react';
 import { LoanTimeline } from './LoanTimeline';
-import { ChatBot } from './ChatBot';
 import { BDAContactDialog } from './BDAContactDialog';
 import { useLoanData } from '../../hooks/useLoanData';
 import { useLanguage } from '../../hooks/useLanguage';
@@ -39,7 +38,8 @@ interface DashboardProps {
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
-  const [activeModal, setActiveModal] = useState<'timeline' | 'chat' | 'bda' | 'language' | null>(null);
+  const [activeModal, setActiveModal] = useState<'timeline' | 'bda' | 'language' | null>(null);
+  const [showChatbot, setShowChatbot] = useState(false);
   const { loans, isLoading } = useLoanData(user.applicationIds);
   const { t } = useLanguage();
 
@@ -305,7 +305,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
 
               <Button 
                 variant="outline" 
-                onClick={() => setActiveModal('chat')}
+                onClick={() => setShowChatbot(true)}
                 className="justify-between h-12"
               >
                 <div className="flex items-center gap-2">
@@ -367,11 +367,21 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
         />
       )}
       
-      {activeModal === 'chat' && (
-        <ChatBot 
-          loan={loan} 
-          onClose={() => setActiveModal(null)} 
-        />
+      {showChatbot && (
+        <div className="fixed inset-0 z-50 bg-background">
+          <div 
+            dangerouslySetInnerHTML={{ 
+              __html: '<elevenlabs-convai agent-id="agent_7901k5y2f5bqf9c85qvee0mm7fa4"></elevenlabs-convai>' 
+            }}
+          />
+          <Button 
+            variant="outline" 
+            onClick={() => setShowChatbot(false)}
+            className="absolute top-4 right-4 z-10"
+          >
+            Close
+          </Button>
+        </div>
       )}
       
       {activeModal === 'language' && (
