@@ -22,9 +22,11 @@ import {
   History
 } from 'lucide-react';
 import { LoanTimeline } from './LoanTimeline';
-import { DocumentUpload } from './DocumentUpload';
 import { ChatBot } from './ChatBot';
+import { BDAContactDialog } from './BDAContactDialog';
 import { useLoanData } from '../../hooks/useLoanData';
+import { useLanguage } from '../../hooks/useLanguage';
+import { LanguageSelector } from '../LanguageSelector';
 
 interface User {
   mobileNumber: string;
@@ -37,15 +39,16 @@ interface DashboardProps {
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
-  const [activeModal, setActiveModal] = useState<'timeline' | 'upload' | 'chat' | null>(null);
+  const [activeModal, setActiveModal] = useState<'timeline' | 'chat' | 'bda' | 'language' | null>(null);
   const { loans, isLoading } = useLoanData(user.applicationIds);
+  const { t } = useLanguage();
 
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center space-y-4">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-          <p className="text-muted-foreground">Loading your loan details...</p>
+          <p className="text-muted-foreground">{t('loadingDetails')}</p>
         </div>
       </div>
     );
@@ -59,9 +62,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
         <Card className="w-full max-w-md text-center">
           <CardContent className="pt-6">
             <FileText className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-semibold mb-2">No Loans Found</h3>
+            <h3 className="text-lg font-semibold mb-2">{t('noLoansFound')}</h3>
             <p className="text-muted-foreground">
-              No loan applications are associated with your account.
+              {t('noLoanApplications')}
             </p>
           </CardContent>
         </Card>
@@ -136,17 +139,17 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-xl font-semibold text-foreground">Loan Dashboard</h1>
-              <p className="text-sm text-muted-foreground">Welcome back, {user.name}</p>
+              <h1 className="text-xl font-semibold text-foreground">{t('loanDashboard')}</h1>
+              <p className="text-sm text-muted-foreground">{t('welcomeBack')}, {user.name}</p>
             </div>
             <Button 
               variant="outline" 
               size="sm"
-              onClick={() => setActiveModal('chat')}
+              onClick={() => setActiveModal('language')}
               className="gap-2"
             >
               <MessageCircle className="w-4 h-4" />
-              Help
+              {t('chooseLanguage')}
             </Button>
           </div>
         </div>
@@ -175,8 +178,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                   {getStageIcon(loan.stage)}
                   <span className="font-medium">Current Status</span>
                 </div>
-                <Badge className={`${getStageColor(loan.stage)} border-0`}>
-                  {loan.stage.replace(/_/g, ' ').toUpperCase()}
+                <Badge className={`${getStageColor(loan.stage)} border-0 text-foreground font-medium`}>
+                  {t(loan.stage)}
                 </Badge>
               </div>
               
@@ -187,7 +190,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
               
               {loan.rejectionReason && (
                 <div className="p-3 rounded-lg bg-status-rejected-bg border border-status-rejected/20">
-                  <p className="text-sm text-status-rejected font-medium">Rejection Reason:</p>
+                  <p className="text-sm text-status-rejected font-medium">{t('rejectionReason')}:</p>
                   <p className="text-sm text-status-rejected/80">{loan.rejectionReason}</p>
                 </div>
               )}
@@ -201,7 +204,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                 <div className="flex items-center gap-3">
                   <User className="w-5 h-5 text-muted-foreground" />
                   <div>
-                    <p className="text-sm text-muted-foreground">Student</p>
+                    <p className="text-sm text-muted-foreground">{t('studentName')}</p>
                     <p className="font-medium">{loan.studentName}</p>
                   </div>
                 </div>
@@ -209,7 +212,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                 <div className="flex items-center gap-3">
                   <IndianRupee className="w-5 h-5 text-muted-foreground" />
                   <div>
-                    <p className="text-sm text-muted-foreground">Loan Amount</p>
+                    <p className="text-sm text-muted-foreground">{t('loanAmount')}</p>
                     <p className="font-medium text-lg">{formatCurrency(loan.loanAmount)}</p>
                   </div>
                 </div>
@@ -217,15 +220,15 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                 <div className="flex items-center gap-3">
                   <Calendar className="w-5 h-5 text-muted-foreground" />
                   <div>
-                    <p className="text-sm text-muted-foreground">Tenure</p>
-                    <p className="font-medium">{loan.tenureMonths} months</p>
+                    <p className="text-sm text-muted-foreground">{t('tenure')}</p>
+                    <p className="font-medium">{loan.tenureMonths} {t('months')}</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
                   <Clock className="w-5 h-5 text-muted-foreground" />
                   <div>
-                    <p className="text-sm text-muted-foreground">Applied On</p>
+                    <p className="text-sm text-muted-foreground">{t('appliedAt')}</p>
                     <p className="font-medium">{formatDate(loan.appliedAt)}</p>
                   </div>
                 </div>
@@ -235,7 +238,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                 <div className="flex items-center gap-3">
                   <FileText className="w-5 h-5 text-muted-foreground" />
                   <div>
-                    <p className="text-sm text-muted-foreground">Course</p>
+                    <p className="text-sm text-muted-foreground">{t('courseName')}</p>
                     <p className="font-medium">{loan.courseName}</p>
                   </div>
                 </div>
@@ -243,9 +246,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                 <div className="flex items-center gap-3">
                   <CheckCircle className="w-5 h-5 text-muted-foreground" />
                   <div>
-                    <p className="text-sm text-muted-foreground">Course Access</p>
+                    <p className="text-sm text-muted-foreground">{t('courseAccess')}</p>
                     <Badge variant={loan.courseAccess ? "default" : "secondary"}>
-                      {loan.courseAccess ? "Granted" : "Pending"}
+                      {loan.courseAccess ? t('granted') : t('pending')}
                     </Badge>
                   </div>
                 </div>
@@ -253,7 +256,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                 <div className="flex items-center gap-3">
                   <IndianRupee className="w-5 h-5 text-muted-foreground" />
                   <div>
-                    <p className="text-sm text-muted-foreground">Processing Fee</p>
+                    <p className="text-sm text-muted-foreground">{t('processingFee')}</p>
                     <p className="font-medium">
                       {loan.processingFee ? formatCurrency(loan.processingFee) : '—'}
                     </p>
@@ -263,7 +266,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                 <div className="flex items-center gap-3">
                   <Calendar className="w-5 h-5 text-muted-foreground" />
                   <div>
-                    <p className="text-sm text-muted-foreground">First EMI Date</p>
+                    <p className="text-sm text-muted-foreground">{t('firstEmiDate')}</p>
                     <p className="font-medium">
                       {loan.firstEmiDate ? new Date(loan.firstEmiDate).toLocaleDateString('en-IN') : '—'}
                     </p>
@@ -275,7 +278,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
             <Separator />
 
             {/* Action Buttons */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               <Button 
                 variant="outline" 
                 onClick={() => setActiveModal('timeline')}
@@ -283,32 +286,19 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
               >
                 <div className="flex items-center gap-2">
                   <History className="w-4 h-4" />
-                  Timeline
+                  {t('viewTimeline')}
                 </div>
                 <ChevronRight className="w-4 h-4" />
               </Button>
 
               <Button 
                 variant="outline" 
-                onClick={() => setActiveModal('upload')}
-                disabled={loan.stage !== 'additional_document_needed'}
-                className="justify-between h-12"
-              >
-                <div className="flex items-center gap-2">
-                  <Upload className="w-4 h-4" />
-                  Upload Docs
-                </div>
-                <ChevronRight className="w-4 h-4" />
-              </Button>
-
-              <Button 
-                variant="outline" 
-                onClick={() => window.open(`tel:${loan.bdaPhone}`)}
+                onClick={() => setActiveModal('bda')}
                 className="justify-between h-12"
               >
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
-                  Contact BDA
+                  {t('contactBda')}
                 </div>
                 <ChevronRight className="w-4 h-4" />
               </Button>
@@ -320,7 +310,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
               >
                 <div className="flex items-center gap-2">
                   <MessageCircle className="w-4 h-4" />
-                  Ask AI
+                  {t('askChatbot')}
                 </div>
                 <ChevronRight className="w-4 h-4" />
               </Button>
@@ -333,21 +323,21 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
           <Card>
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold text-primary">{formatCurrency(loan.loanAmount)}</div>
-              <div className="text-sm text-muted-foreground">Total Amount</div>
+              <div className="text-sm text-muted-foreground">{t('totalAmount')}</div>
             </CardContent>
           </Card>
           
           <Card>
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold text-primary">{loan.tenureMonths}</div>
-              <div className="text-sm text-muted-foreground">Months Tenure</div>
+              <div className="text-sm text-muted-foreground">{t('monthsTenure')}</div>
             </CardContent>
           </Card>
           
           <Card>
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold text-primary">{loan.rateOfInterest}%</div>
-              <div className="text-sm text-muted-foreground">Interest Rate</div>
+              <div className="text-sm text-muted-foreground">{t('interestRate')}</div>
             </CardContent>
           </Card>
           
@@ -356,7 +346,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
               <div className="text-2xl font-bold text-primary">
                 {getStageProgress(loan.stage)}%
               </div>
-              <div className="text-sm text-muted-foreground">Progress</div>
+              <div className="text-sm text-muted-foreground">{t('progress')}</div>
             </CardContent>
           </Card>
         </div>
@@ -370,8 +360,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
         />
       )}
       
-      {activeModal === 'upload' && (
-        <DocumentUpload 
+      {activeModal === 'bda' && (
+        <BDAContactDialog 
           loan={loan} 
           onClose={() => setActiveModal(null)} 
         />
@@ -380,6 +370,13 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
       {activeModal === 'chat' && (
         <ChatBot 
           loan={loan} 
+          onClose={() => setActiveModal(null)} 
+        />
+      )}
+      
+      {activeModal === 'language' && (
+        <LanguageSelector 
+          isOpen={true}
           onClose={() => setActiveModal(null)} 
         />
       )}

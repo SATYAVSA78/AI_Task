@@ -75,6 +75,22 @@ const translations = {
     malayalam: 'Malayalam',
     kannada: 'Kannada',
     
+    // Additional terms
+    loadingDetails: 'Loading your loan details...',
+    noLoanApplications: 'No loan applications are associated with your account.',
+    loanDashboard: 'Loan Dashboard',
+    welcomeBack: 'Welcome back',
+    totalAmount: 'Total Amount',
+    monthsTenure: 'Months Tenure',
+    interestRate: 'Interest Rate',
+    progress: 'Progress',
+    granted: 'Granted',
+    pending: 'Pending',
+    call: 'Call',
+    from: 'from',
+    applicationCurrently: 'Your application is currently in',
+    stage: 'stage',
+    
     // Stages
     application_created: 'Application Created',
     consent_pending: 'Consent Pending',
@@ -150,6 +166,22 @@ const translations = {
     tamil: 'తమిళం',
     malayalam: 'మలయాళం',
     kannada: 'కన్నడ',
+    
+    // Additional terms
+    loadingDetails: 'మీ రుణ వివరాలను లోడ్ చేస్తోంది...',
+    noLoanApplications: 'మీ ఖాతాతో రుణ దరఖాస్తులు ఏవీ సంబంధించబడలేదు.',
+    loanDashboard: 'రుణ డాష్‌బోర్డ్',
+    welcomeBack: 'మళ్లీ స్వాగతం',
+    totalAmount: 'మొత్తం రొక',
+    monthsTenure: 'నెలల కాలపరిమితి',
+    interestRate: 'వడ్డీ రేటు',
+    progress: 'పురోగతి',
+    granted: 'మంజూరు చేయబడింది',
+    pending: 'పెండింగ్‌లో ఉంది',
+    call: 'కాల్ చేయండి',
+    from: 'నుండి',
+    applicationCurrently: 'మీ దరఖాస్తు ప్రస్తుతం ఉంది',
+    stage: 'దశలో',
     
     // Stages
     application_created: 'అప్లికేషన్ సృష్టించబడింది',
@@ -227,6 +259,22 @@ const translations = {
     malayalam: 'मलयालम',
     kannada: 'कन्नड़',
     
+    // Additional terms
+    loadingDetails: 'आपके लोन विवरण लोड हो रहे हैं...',
+    noLoanApplications: 'आपके खाते से कोई लोन आवेदन जुड़े नहीं हैं।',
+    loanDashboard: 'लोन डैशबोर्ड',
+    welcomeBack: 'वापस स्वागत है',
+    totalAmount: 'कुल राशि',
+    monthsTenure: 'महीनों की अवधि',
+    interestRate: 'ब्याज दर',
+    progress: 'प्रगति',
+    granted: 'प्रदान किया गया',
+    pending: 'लंबित',
+    call: 'कॉल करें',
+    from: 'से',
+    applicationCurrently: 'आपका आवेदन वर्तमान में है',
+    stage: 'चरण में',
+    
     // Stages
     application_created: 'आवेदन बनाया गया',
     consent_pending: 'सहमति लंबित',
@@ -302,6 +350,22 @@ const translations = {
     tamil: 'தமிழ்',
     malayalam: 'மலையாளம்',
     kannada: 'கன்னடம்',
+    
+    // Additional terms
+    loadingDetails: 'உங்கள் கடன் விவரங்கள் ஏற்றப்படுகின்றன...',
+    noLoanApplications: 'உங்கள் கணக்குடன் கடன் விண்ணப்பங்கள் எதுவும் தொடர்புடையவை இல்லை.',
+    loanDashboard: 'கடன் டாஷ்போர்டு',
+    welcomeBack: 'மீண்டும் வரவேற்கிறோம்',
+    totalAmount: 'மொத்த தொகை',
+    monthsTenure: 'மாதங்கள் காலம்',
+    interestRate: 'வட்டி விகிதம்',
+    progress: 'முன்னேற்றம்',
+    granted: 'வழங்கப்பட்டது',
+    pending: 'நிலுவையில்',
+    call: 'அழைக்கவும்',
+    from: 'இலிருந்து',
+    applicationCurrently: 'உங்கள் விண்ணப்பம் தற்போது உள்ளது',
+    stage: 'நிலையில்',
     
     // Stages
     application_created: 'விண்ணப்பம் உருவாக்கப்பட்டது',
@@ -379,6 +443,22 @@ const translations = {
     malayalam: 'മലയാളം',
     kannada: 'കന്നഡ',
     
+    // Additional terms
+    loadingDetails: 'നിങ്ങളുടെ ലോൺ വിശദാംശങ്ങൾ ലോഡ് ചെയ്യുന്നു...',
+    noLoanApplications: 'നിങ്ങളുടെ അക്കൗണ്ടുമായി ലോൺ അപേക്ഷകൾ ബന്ധപ്പെട്ടിട്ടില്ല.',
+    loanDashboard: 'ലോൺ ഡാഷ്ബോർഡ്',
+    welcomeBack: 'വീണ്ടും സ്വാഗതം',
+    totalAmount: 'മൊത്തം തുക',
+    monthsTenure: 'മാസങ്ങളുടെ കാലാവധി',
+    interestRate: 'പലിശ നിരക്ക്',
+    progress: 'പുരോഗതി',
+    granted: 'അനുവദിച്ചു',
+    pending: 'പെൻഡിംഗ്',
+    call: 'കോൾ ചെയ്യുക',
+    from: 'നിന്ന്',
+    applicationCurrently: 'നിങ്ങളുടെ അപേക്ഷ നിലവിൽ ഉണ്ട്',
+    stage: 'ഘട്ടത്തിൽ',
+    
     // Stages
     application_created: 'അപേക്ഷ സൃഷ്ടിച്ചു',
     consent_pending: 'സമ്മതം പെൻഡിംഗ്',
@@ -454,6 +534,22 @@ const translations = {
     tamil: 'ತಮಿಳು',
     malayalam: 'ಮಲಯಾಳಂ',
     kannada: 'ಕನ್ನಡ',
+    
+    // Additional terms
+    loadingDetails: 'ನಿಮ್ಮ ಲೋನ್ ವಿವರಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ...',
+    noLoanApplications: 'ನಿಮ್ಮ ಖಾತೆಯೊಂದಿಗೆ ಯಾವುದೇ ಲೋನ್ ಅರ್ಜಿಗಳು ಸಂಬಂಧಿಸಿಲ್ಲ.',
+    loanDashboard: 'ಲೋನ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್',
+    welcomeBack: 'ಮತ್ತೆ ಸ್ವಾಗತ',
+    totalAmount: 'ಒಟ್ಟು ಮೊತ್ತ',
+    monthsTenure: 'ತಿಂಗಳುಗಳ ಅವಧಿ',
+    interestRate: 'ಬಡ್ಡಿ ದರ',
+    progress: 'ಪ್ರಗತಿ',
+    granted: 'ಅನುಮತಿಸಲಾಗಿದೆ',
+    pending: 'ಬಾಕಿ',
+    call: 'ಕರೆ ಮಾಡಿ',
+    from: 'ನಿಂದ',
+    applicationCurrently: 'ನಿಮ್ಮ ಅರ್ಜಿ ಪ್ರಸ್ತುತ ಇದೆ',
+    stage: 'ಹಂತದಲ್ಲಿ',
     
     // Stages
     application_created: 'ಅಪ್ಲಿಕೇಶನ್ ರಚಿಸಲಾಗಿದೆ',

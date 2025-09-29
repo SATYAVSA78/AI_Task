@@ -17,6 +17,7 @@ import {
   FileText
 } from 'lucide-react';
 import { LoanData, TimelineEvent } from '../../hooks/useLoanData';
+import { useLanguage } from '../../hooks/useLanguage';
 
 interface LoanTimelineProps {
   loan: LoanData;
@@ -24,6 +25,7 @@ interface LoanTimelineProps {
 }
 
 export const LoanTimeline: React.FC<LoanTimelineProps> = ({ loan, onClose }) => {
+  const { t } = useLanguage();
   const getActorIcon = (actor: string) => {
     if (actor.includes('NBFC') || actor.includes('Finance')) {
       return <Building2 className="w-4 h-4" />;
@@ -66,7 +68,7 @@ export const LoanTimeline: React.FC<LoanTimelineProps> = ({ loan, onClose }) => 
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <FileText className="w-5 h-5" />
-            Application Timeline - {loan.applicationId}
+            {t('applicationTimeline')} - {loan.applicationId}
           </DialogTitle>
         </DialogHeader>
 
@@ -91,11 +93,11 @@ export const LoanTimeline: React.FC<LoanTimelineProps> = ({ loan, onClose }) => 
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <Badge variant="outline" className="text-xs">
-                            {formatStage(event.toStage)}
+                            {t(event.toStage)}
                           </Badge>
                           {event.fromStage && (
                             <span className="text-xs text-muted-foreground">
-                              from {formatStage(event.fromStage)}
+                              {t('from')} {t(event.fromStage)}
                             </span>
                           )}
                         </div>
@@ -143,9 +145,9 @@ export const LoanTimeline: React.FC<LoanTimelineProps> = ({ loan, onClose }) => 
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="font-medium text-foreground">Current Status</p>
+                    <p className="font-medium text-foreground">{t('currentStage')}</p>
                     <p className="text-sm text-muted-foreground">
-                      Your application is currently in <strong>{formatStage(loan.stage)}</strong> stage
+                      {t('applicationCurrently')} <strong>{t(loan.stage)}</strong> {t('stage')}
                     </p>
                   </div>
                 </div>
